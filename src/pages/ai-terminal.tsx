@@ -51,14 +51,14 @@ export default function AITerminal() {
   );
 
   const handleAIQuery = async (query: string) => {
-    if (!query.trim()) return;
+    if (!query.trim() || !selectedAI) return;
 
     setAiConversation(prev => [...prev, { role: 'user', content: query }]);
     setIsProcessing(true);
 
     try {
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/${selectedAI.model}:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`,
         {
           method: 'POST',
           headers: {
@@ -74,7 +74,13 @@ export default function AITerminal() {
                 role: 'user',
                 parts: [{ text: query }]
               }
-            ]
+            ],
+            generationConfig: {
+              temperature: selectedAI.temperature,
+              topK: 40,
+              topP: 0.95,
+              maxOutputTokens: 8192,
+            }
           })
         }
       );
@@ -151,12 +157,20 @@ export default function AITerminal() {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (!input.trim() || isProcessing) return;
+
+      const trimmed = input.trim();
+      if (!trimmed || isProcessing) return;
+
+      if (['exit', 'clear', 'history', 'help'].includes(trimmed)) {
+        handleCommand(trimmed);
+        setInput('');
+        return;
+      }
 
       if (selectedAI) {
-        handleAIQuery(input);
+        handleAIQuery(trimmed);
       } else {
-        handleCommand(input);
+        handleCommand(trimmed);
       }
 
       setInput('');

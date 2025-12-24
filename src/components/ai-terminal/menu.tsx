@@ -38,7 +38,7 @@ export default function AIMenuModal({ aiModels, onSelectAI, onClose, theme }: AI
               <button
                 key={ai.id}
                 onClick={() => onSelectAI(ai)}
-                className="border-2 rounded-lg p-4 text-left hover:bg-opacity-10 hover:bg-white transition-all"
+                className="border-2 rounded-lg p-4 text-left hover:bg-white/5 transition-all"
                 style={{ borderColor: theme.border }}
               >
                 <div className="flex items-center gap-3 mb-2">

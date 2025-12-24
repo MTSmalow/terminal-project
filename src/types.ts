@@ -3,6 +3,8 @@ export interface AIModel {
   name: string;
   icon: any;
   description: string;
+  model: string;
+  temperature: number; 
 }
 
 export interface HistoryEntry {
