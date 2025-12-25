@@ -233,7 +233,7 @@ export default function AITerminal() {
     setSelectedAI(ai);
     setShowAIMenu(false);
     setAiConversation([]);
-    addToHistory('', `✓ IA "${ai.name}" selecionada. Digite suas perguntas ou "exit" para sair.`);
+    addToHistory('', `IA "${ai.name}" selecionada. Digite suas perguntas ou "exit" para sair.`);
   };
 
   const getPrompt = () => {

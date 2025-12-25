@@ -1,5 +1,5 @@
 import { MessageSquare, Code, Sparkles, Database } from 'lucide-react';
-import type { AIModel, FileSystem, Theme } from './types';
+import type { AIModel , Theme } from './types';
 
 export const AI_MODELS: AIModel[] = [
   { 
@@ -44,25 +44,4 @@ export const THEME: Theme = {
   ok: '#22c55e',
   error: '#ef4444',
   accent: '#3b82f6'
-};
-
-export const INITIAL_FS: FileSystem = {
-  'home': {
-    type: 'directory',
-    children: {
-      'documentos': {
-        type: 'directory',
-        children: {
-          'readme.txt': { type: 'file', content: 'Bem-vindo ao Terminal AI!\nEste é um terminal funcional com IA integrada.' },
-          'projetos.txt': { type: 'file', content: 'Meus Projetos:\n- Terminal AI\n- Portfolio\n- Estudos' }
-        }
-      },
-      'scripts': {
-        type: 'directory',
-        children: {
-          'hello.sh': { type: 'file', content: '#!/bin/bash\necho "Hello World!"' }
-        }
-      }
-    }
-  }
 };
